@@ -56,12 +56,12 @@
         </p>
         <ul class="inter">
             <li>
-                <router-link :to="{ name: 'exch'}">
+                <router-link :to="{ name: 'exch', params:{ name:'全场通用2元优惠券', con:'2元优惠券'} }">
                     <span class="intimg"><img :src="require('./../components/img/yh_01.jpg')" alt="" class="vbanimg"></span><span class="intfont">全场通用2元优惠券</span>
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'exch'}">
+                <router-link :to="{ name: 'exch', params:{ name:'大乐透一注优惠券', con:'随机赠送一注大乐透'} }">
                     <span class="intimg"><img :src="require('./../components/img/yh_02.jpg')" alt="" class="vbanimg"></span><span class="intfont">大乐透一注</span>
                 </router-link>    
             </li>
@@ -93,7 +93,7 @@ export default {
     qdfun(){
         this.qiandao = ' 已签到';
         localStorage.setItem('qd',true);
-        this.$toast.center('恭喜您成功签到，获得 10 奖励');
+        this.$toast.center('恭喜您成功签到，获得 10积分 奖励');
     }
   }
 }

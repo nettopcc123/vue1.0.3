@@ -2,21 +2,25 @@ import axios from 'axios'
 import qs from 'qs'
 axios.interceptors.request.use(config => {
   // loading
+  console.log('11111111')
   return config
 }, error => {
   return Promise.reject(error)
 });
 
 axios.interceptors.response.use(response => {
+  console.log('22222')
   return response
 }, error => {
+  console.log('33333')
   return Promise.resolve(error.response)
 });
 function checkStatus(response) {
   // loading
   // 如果http状态码正常，则直接返回数据
   if (response && (response.status === 200 || response.status === 304 || response.status === 400)) {
-    return response
+    console.log('666' + response.status + ' --- ' + response)
+    return response.status
     // 如果不需要除了data之外的数据，可以直接 return response.data
   }
   // 异常状态下，把错误信息返回去
@@ -37,38 +41,28 @@ function checkCode(res) {
   return res
 }
 export default {
-  // post (url, data) {
-  //   return axios({
-  //     method: 'post',
-  //     // https://cnodejs.org/api/v1
-  //     url,
-  //     data: qs.stringify(data),
-  //     timeout: 10000,
-  //     headers: {
-  //       'X-Requested-With': 'XMLHttpRequest',
-  //       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-  //     }
-  //   }).then(
-  //     (response) => {
-  //       return checkStatus(response)
-  //     }
-  //   ).then(
-  //     (res) => {
-  //       return checkCode(res)
-  //     }
-  //   )
-  // },
-
-  post (url, params) {
-    return axios.post(url,{
-      params : params ? params : ''
-    }).then(
-      (response) => {
-        return checkStatus(response)
+  post (url, params,callback) {
+    // axios.post(url,params)
+    //   .then(function (response) {
+    //     console.log('44444' + JSON.stringify(response))
+    //     return response
+    //   })
+    //     .catch(function (error) {
+    //       console.log('5555')
+    //       return console.log(error);
+    //   });
+    // },
+    axios.post(url,params)
+    .then(function (response) {
+      console.log('44444' + JSON.stringify(response));
+      if (typeof callback === 'function') {
+        return callback(response);
       }
-    ).catch(err => {
-       console.log(err);
-    });
+    })
+    .catch(function (error) {
+      console.log('5555')
+      return console.log(error);
+    })
   },
   get (url, params) {
     return axios.get(url,{

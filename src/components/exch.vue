@@ -2,8 +2,8 @@
 <div id="favorites">
     <div class="faexbg"><img :src="require('./../components/img/exbg.png')" alt="" class="vbanimg"></div>
     <div class="favors">
-     <p class="ftit">全场通用2元优惠券</p>
-     <p class="ftcon">2元优惠券</p>
+     <p class="ftit">{{ fname }}</p>
+     <p class="ftcon">{{ fcon }}</p>
 
      <p class="ftit">兑换方式</p>
 
@@ -11,13 +11,15 @@
          <input type="checkbox" id="awesome"   />
         <label for="awesome">电信积分</label>
      </p>
-     <p class="ftclic">1份</p>
+     <p class="ftclic" v-for="v,index in flis" v-bind:class="{ fact: isshow }">
+       {{ v }}
+     </p>
 
      <p class="fbtit">活动时间</p>
      <p class="ftcon">2018-11-11至2019-05-30</p>
 
      <p class="fbtit">权益介绍</p>
-     <p class="fcon">2元优惠券，大家快来换购</p>
+     <p class="fcon">{{ fname }}，大家快来换购</p>
     </div>
     <div class="exfot">
         <span class="exfl">实付: <span class="exfont">500 积分</span></span>
@@ -31,11 +33,15 @@ export default {
   name:'favorites',
   data(){
     return {
+        flis:['1份'],
+        fname:'',
+        fcon:''
     }
   },
   mounted:function(){
     this.$nextTick(function(){
-
+        this.fname = this.$route.params.name;
+        this.fcon = this.$route.params.con;
     })
   },
   methods:{
@@ -100,11 +106,16 @@ input {
 }
 .ftclic{
     width: 1rem;
-    border:1px solid #dc3b40;
+    border:1px solid #b5b5b5;
     line-height: 0.36rem;
     height:0.36rem;
     margin:0.1rem auto;
     font-size:0.16rem;
+    color:#5d5d5d;
+    //background: url('img/esj.png') right bottom no-repeat;
+}
+.fact{
+    border:1px solid #dc3b40;
     color:#dc3b40;
     background: url('img/esj.png') right bottom no-repeat;
 }
@@ -148,7 +159,7 @@ input {
 .exfr{
     width: 30%;
     float:right;
-    background:#dc3b40;
+    background:#bfbfbf;
     text-align: center;
     color:#fff;
     font-size: 0.16rem;

@@ -16,11 +16,12 @@
            <input type="hidden" name="needcheck[]" value="msr3 您的邮箱或者微博：">
     </div>
     </div>
-  <button class="fbut" @click="isloadshow()">提交</button>
+  <button class="fbut" @click='fetchDatas(msr1,msr2)'>提交</button>
  </div>
  </template>
 <script>
 import Vue from 'vue';
+import axios from 'axios'
 import 'vue2-toast/lib/toast.css';
 import Toast from 'vue2-toast';
 Vue.use(Toast);
@@ -36,56 +37,31 @@ export default {
       msr5:''
     }
   },
+  mounted:function(){
+      this.$nextTick(() => {//在下次 DOM 更新循环结束之后执行延迟回调
+        // this.fetchDatas(this.msr1,this.msr2);
+      })
+  },
   methods:{
     descArea(){
       let textVal = this.introduct.length;
       this.Surplus = 140 - textVal;
     },
-    isloadshow() {
-      this.$store.commit('isloadshow');
-
-
-      //注册请求
+    fetchDatas: async function (userName,pwd) {
       let params = {
-        userName: this.msr1,
-        pwd: this.msr2,
+        "userName":userName, 
+        "pwd":pwd
       };
-      //let url=window.encodeURIComponent("http://154.48.238.35:8085/UserService.svc/UserRegister");
       let url = 'http://154.48.238.35:8085/UserService.svc/UserRegister';
-      const res = this.http.post(url,params);//获取成功
-      console.log(JSON.stringify(res) + typeof(res))
-      if (res.status == 200) {
-          console.log('成功' + res.data);
-          let data = JSON.parse(res.data);
-          let newdata = data['Data'];
-          console.log('newData---' + JSON.stringify(newdata))
-          // if(newdata['IsEnable'] == true){
-          //     window.location.href= newdata['Url']
-          // }else{
-          //     return;
-          // }
-      } else {
-        const dataError = this.http.get(this.api.error, params);//获取失败
-        if (dataError.status != 200) {
-          console.info(dataError);
-        }
-      }
-
-
-
-      
-      setTimeout(() => {
-        this.isloadhid();
-        localStorage.setItem('u',this.msr1);
-        localStorage.setItem('p',this.msr2);
-        if (!window.indexedDB) {
-            console.log("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.")
+      let callback = response => {
+        if(response.data.d.ErrorMessage == '注册成功！'){
+          this.$toast.center('恭喜您 注册成功!');
+          this.$router.push({path:'/login'});
         }else{
-
+          this.$toast.center(response.data.d.ErrorMessage);
         }
-
-        this.$router.push({path:'/login'});
-      },2000);
+      };
+      await this.http.post(url,params,callback);
     },
     isloadhid() {
       this.$store.commit('isloadhid');
