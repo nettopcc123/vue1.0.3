@@ -78,12 +78,18 @@ export default {
     return {
       weather:[],
       qiandao: '签 到',
-      username:''
+      username:'',
+      gitqd:false
     }
   },
+  created(){
+    this.isqd();
+  }
+  ,
   mounted:function(){
     this.$nextTick(function(){
         this.getname();
+        this.isqd();
     })
   },
   methods:{
@@ -91,9 +97,21 @@ export default {
         this.username = localStorage.getItem('u');
     },
     qdfun(){
+        this.gitqd = localStorage.getItem('qd');
+        if(this.gitqd == 'true'){
+            this.$toast.center('您已签到，请误重复签到');
+            return;
+        }
         this.qiandao = ' 已签到';
         localStorage.setItem('qd',true);
         this.$toast.center('恭喜您成功签到，获得 10 积分奖励');
+    },
+    isqd(){
+        this.gitqd = localStorage.getItem('qd');
+        if(this.gitqd == 'true'){
+            this.qiandao = ' 已签到';
+            return;
+        }
     }
   }
 }
@@ -171,7 +189,7 @@ export default {
     top:10px;
     background:#fff;
     border-radius: 0.1rem 0 0 0.1rem;
-    width: 0.8rem;
+    width: 0.9rem;
     height: 0.4rem;
     line-height: 0.4rem;
     text-align: center;

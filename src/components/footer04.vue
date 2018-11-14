@@ -9,19 +9,19 @@
              </li>
             <li >
                 <router-link :to="{ name: 'htmlViewSample'}">
-                    <i class="iconfont icon-news01"></i>
+                    <i class="iconfont icon-ball"></i>
                    <p>比赛</p>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'framekj'}" v-bind:class="{ active: isNews }">
-                    <i class="iconfont icon-ball"></i>
+                    <i class="iconfont icon-news01"></i>
                    <p>新闻</p>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'member'}"  v-bind:class="{ active: isActive }">
-                    <i class="iconfont icon-feedback"></i>
+                    <i class="iconfont icon-user"></i>
                    <p>我的</p>
                 </router-link>
             </li>

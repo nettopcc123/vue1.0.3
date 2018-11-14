@@ -6,10 +6,10 @@
         <p class="footbk_p"><strong class="footfk">用户名：</strong></p>
         <p><input type="text" class="inputtext" name="msp1" id="msp1" value="" alt="" v-model="msp1"></p>
         <p class="footbk_p"><strong class="footfk">登入密码：</strong></p>
-        <p><input type="text" class="inputtext" name="msp2" id="msp2" value="" alt="" v-model="msp2"></p>
+        <p><input type="password" class="inputtext" name="msp2" id="msp2" value="" alt="" v-model="msp2"></p>
     </div>
     </div>
-  <button class="fbut" @click='fetchDatas(msp1,msp2)'>提交</button>
+  <button class="fbut" @click='fetchDatas(msp1,msp2)'>确认登入</button>
   <button class="fbutreg" @click='goreg()'>注册</button>
  </div>
  </template>
