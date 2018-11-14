@@ -9,7 +9,8 @@
         <p><input type="text" class="inputtext" name="msp2" id="msp2" value="" alt="" v-model="msp2"></p>
     </div>
     </div>
-  <button class="fbut" @click="isloadshow()">提交</button>
+  <button class="fbut" @click='fetchDatas(msp1,msp2)'>提交</button>
+  <button class="fbutreg" @click='goreg()'>注册</button>
  </div>
  </template>
 <script>
@@ -26,36 +27,43 @@ export default {
       msp2:'',
     }
   },
+  created(){
+    this.$nextTick(() => {
+        return this.$store.state.isuser;
+    })
+  },
   methods:{
     descArea(){
       var textVal = this.introduct.length;
       this.Surplus = 140 - textVal;
     },
-    isloadshow() {
-      this.$store.commit('isloadshow');
-      let u = localStorage.getItem('u');
-      let p = localStorage.getItem('p');
-      console.log(this.msp1 + '成功' + this.msp2 + ' uuuuu ' + u + ' ppp ' + p)
-
-
-
-
-
-      setTimeout(() => {
-        if(this.msp1 == u && this.msp2 == p){
-            this.$router.push({path:'/'});
-            this.isloadhidS();
+    fetchDatas: async function (userName,pwd) {
+      let params = {
+        "userName":userName, 
+        "pwd":pwd
+      };
+      let url = 'http://154.48.238.35:8085/UserService.svc/Login';
+      let callback = response => {
+        if(response.data.d != null){
+          this.isloadhidS();
         }else{
-            this.isloadhidF();
+          this.isloadhidF();
         }
-      },2000);
+      };
+      await this.http.post(url,callback,params);
+    },
+    goreg(){
+      this.$router.push({path:'/register'});
     },
     isloadhidF() {
+      this.$store.commit('isuserhid');
       this.$store.commit('isloadhid');
       this.$toast.center('登入失败请重新登入');
     },
     isloadhidS() {
+      this.$store.commit('isusershow'); //用户状态
       this.$store.commit('isloadhid');
+      this.$router.push({path:'/member'});
       this.$toast.center('登入成功');
     }
   }
@@ -165,5 +173,12 @@ export default {
   clear:both;
   overflow:hidden;
   margin-top:0.1rem;
+}
+.fbutreg{
+    width: 94%;
+    margin-top:0.15rem;
+    color: #fff;
+    background-color: #a5818b;
+    border-color: #96726b;
 }
 </style>

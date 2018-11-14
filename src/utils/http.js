@@ -41,7 +41,7 @@ function checkCode(res) {
   return res
 }
 export default {
-  post (url, params,callback) {
+  post (url, callback, params) {
     // axios.post(url,params)
     //   .then(function (response) {
     //     console.log('44444' + JSON.stringify(response))
@@ -52,7 +52,7 @@ export default {
     //       return console.log(error);
     //   });
     // },
-    axios.post(url,params)
+    axios.post(url, params)
     .then(function (response) {
       console.log('44444' + JSON.stringify(response));
       if (typeof callback === 'function') {
@@ -64,16 +64,19 @@ export default {
       return console.log(error);
     })
   },
-  get (url, params) {
-    return axios.get(url,{
-      params : params ? params : ''
-    }).then (
+  
+  get (url,callback, params) {
+    axios.get(url,params).then (
       (response) => {
-        return checkStatus(response)
+        if (typeof callback === 'function') {
+          return callback(response);
+        }
       }
     ).then (
       (res) => {
-        return checkCode(res)
+        if (typeof callback === 'function') {
+          return callback(res);
+        }
       }
     )
   }

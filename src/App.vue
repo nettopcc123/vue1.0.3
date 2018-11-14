@@ -108,7 +108,7 @@ export default {
    },
   mounted:function(){
       this.$nextTick(() => {//在下次 DOM 更新循环结束之后执行延迟回调
-         this.fetchDatas(1,3);
+        // this.fetchDatas(1,3);
       })
   },
   computed:{
@@ -137,104 +137,9 @@ export default {
     },
     ismenuhid() {
         this.$store.commit('ismenuhid');
-    },
-  fetchDatas: async function (currentIndex, pageName) {
-    let params = {
-      index: currentIndex,
-      pagesize: pageName,
-    }; 
-    let url=window.encodeURIComponent("http://154.48.238.35:8085/UserService.svc/UserRegister");
-    const res = await this.http.get(this.api.aspAPI + url);//获取成功
-    console.log(JSON.stringify(res) + typeof(res))
-    if (res.status == 200) {
-        console.log('成功' + res.data);
-        let data = JSON.parse(res.data);
-        let newdata = data['Data'];
-        console.log('newData---' + JSON.stringify(newdata))
-        // if(newdata['IsEnable'] == true){
-        //     window.location.href= newdata['Url']
-        // }else{
-        //     return;
-        // }
-    } else {
-      const dataError = await this.http.get(this.api.error, params);//获取失败
-      if (dataError.status != 200) {
-        console.info(dataError);
-      }
     }
   }
-
-
-    // fetchDatas(currentIndex, pageName){
-    //   //console.log(currentIndex + '---' +pageName);
-    //     let params = {
-    //         aId: 1,
-    //         sId: 4,
-    //     };
-    //     let url=window.encodeURIComponent("http://154.48.238.35:8085/AppShellService.svc/GetAppInfo?aId=1&sId=1");
-    //     const res = this.http.get('http://154.48.238.35:8080/Home/rd?rdurl=' + url);//获取成功
-    //     console.log(JSON.stringify(this.http.get('http://154.48.238.35:8080/Home/rd?rdurl=' + url)) + 'ccccc');
-    //          //JSON.stringify(this.state)
-    //     // if (res.status == true) {
-    //     //     console.log('有没');
-    //     //     this.getpage = res.data.data;
-    //     //     this.pagedata = this.getpage.records;
-    //     //     this.total = this.getpage.total;//拿到总条数
-    //     // } else {
-    //     //     console.log('去了没');
-    //     //     const dataError = this.http.get('http://154.48.238.35:8080/Home/rd?rdurl=' + url);//获取失败
-    //     //     if (dataError.status != 200) {
-    //     //       //console.log(dataError);
-    //     //     }
-    //     // }
-    // },
-    // getConfig(){
-    //       console.log('没有了');
-    //     // 添加响应拦截器
-    //       axios.interceptors.request.use(config => {  
-    //       this.isloadshow();      
-    //          console.log('1')
-    //         return config;
-    //       }, function (error) {
-    //         // 对请求错误做些什么
-    //         console.log('2');
-    //         return Promise.reject(error);
-    //       });
-
-    //     // 添加响应拦截器
-    //     axios.interceptors.response.use(response => {
-    //         // 对响应数据做点什么
-    //         console.log('a3')
-    //         this.isloadhid();  
-    //        // this.$store.commit('isloadhid');
-    //         return response;
-    //       }, function (error) {
-    //         console.log('4')
-    //         // 对响应错误做点什么
-    //         return Promise.reject(error);
-    //     });
-    //     var url=window.encodeURIComponent("http://154.48.238.35:8085/AppShellService.svc/GetAppInfo?aId=100&sId=19");
-    //      axios.get('http://154.48.238.35:8080/Home/rd?rdurl=' + url)  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
-    //         .then(res => {
-    //           console.log(typeof(res) + '---------------')
-    //           console.log(res.Status)
-    //           if( num >= 3){
-    //             this.tips = '加载完成';
-    //             return;
-    //           }
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             this.REQUIRE = false;
-    //     });
-    // }
-
-
-
-
-  }
 }
-
 </script>
 
 <style lang="scss">
@@ -408,11 +313,11 @@ button{
 }
 @font-face {
   font-family: 'iconfont';  /* project id 880675 */
-  src: url('//at.alicdn.com/t/font_880675_uvmepfblyf.eot');
-  src: url('//at.alicdn.com/t/font_880675_uvmepfblyf.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_880675_uvmepfblyf.woff') format('woff'),
-  url('//at.alicdn.com/t/font_880675_uvmepfblyf.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_880675_uvmepfblyf.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_880675_40d6e69mymj.eot');
+  src: url('//at.alicdn.com/t/font_880675_40d6e69mymj.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_880675_40d6e69mymj.woff') format('woff'),
+  url('//at.alicdn.com/t/font_880675_40d6e69mymj.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_880675_40d6e69mymj.svg#iconfont') format('svg');
 }
 .iconfont {
     font-family: "iconfont" !important;
@@ -437,6 +342,9 @@ button{
 }
 .icon-next:before {
     content: "\e620";
+}
+.icon-next01:before {
+    content: "\e65e";
 }
 .icon-zoushi:before {
     content: "\e605";
@@ -491,6 +399,28 @@ button{
 }
 .icon-gift:before {
     content: "\e6b8";
+}
+
+.icon-feedback01:before {
+    content: "\e62e";
+}
+.icon-member:before {
+    content: "\e715";
+}
+.icon-shopping:before {
+    content: "\e680";
+}
+.icon-statement:before {  
+    content: "\e61f";
+}
+.icon-notice:before {
+    content: "\e636";
+}
+.icon-collection:before {
+    content: "\e630";
+}
+.icon-clean:before {
+    content: "\e609";
 }
 .fico{
     display: block;

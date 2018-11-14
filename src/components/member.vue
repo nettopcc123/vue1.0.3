@@ -12,12 +12,13 @@
           </ul>
       </div>
       <ul class="uselis">
-         <li><router-link :to="{name:'feedback'}" class="userouter">意见反馈<i class="iconfont icon-next usenext"></i></router-link></li>
-         <li><router-link :to="{name:'vip'}" class="userouter">会员俱乐部<i class="iconfont icon-next usenext"></i></router-link></li>
-         <li><router-link :to="{name:'disclaimer'}" class="userouter">免责声明<i class="iconfont icon-next usenext"></i></router-link></li>
-         <li><router-link :to="{name:'message'}" class="userouter">站内通知<i class="iconfont icon-next usenext"></i></router-link></li>
-         <li><router-link :to="{name:'favorites'}" class="userouter">我的收藏<i class="iconfont icon-next usenext"></i></router-link></li>
-         <li @click="isloadshow" class="userouter">清除缓存<i class="iconfont icon-next usenext"></i></li>
+         <li><router-link :to="{name:'feedback'}" class="userouter"><i class="iconfont icon-feedback01 meicl"></i>意见反馈<i class="iconfont icon-next01 usenext"></i></router-link></li>
+         <li><router-link :to="{name:'vip'}" class="userouter"><i class="iconfont icon-member meicl"></i>会员俱乐部<i class="iconfont icon-next01 usenext"></i></router-link></li>
+         <li><router-link :to="{name:'shoper'}" class="userouter"><i class="iconfont icon-shopping meicl"></i>积分商城<i class="iconfont icon-next01 usenext"></i></router-link></li>
+         <li><router-link :to="{name:'disclaimer'}" class="userouter"><i class="iconfont icon-statement meicl"></i>免责声明<i class="iconfont icon-next01 usenext"></i></router-link></li>
+         <li><router-link :to="{name:'message'}" class="userouter"><i class="iconfont icon-notice meicl"></i>站内通知<i class="iconfont icon-next01 usenext"></i></router-link></li>
+         <li><router-link :to="{name:'favorites'}" class="userouter"><i class="iconfont icon-collection meicl"></i>我的收藏<i class="iconfont icon-next01 usenext"></i></router-link></li>
+         <li @click="isloadshow" class="userouter"><i class="iconfont icon-clean meicl"></i>清除缓存<i class="iconfont icon-next01 usenext"></i></li>
      </ul>
   </div>
 </template>
@@ -113,7 +114,7 @@ export default {
 }
 .uselis li{
   display:block;
-  line-height: 0.4rem;
+  line-height: 0.5rem;
   margin-bottom:0.05rem;
   text-align: left;
   padding:0 0.05rem;
@@ -127,6 +128,12 @@ export default {
 }
 .usenext{
   float:right;
+}
+.meicl{
+  float:left;
+  margin-right:0.12rem;
+  color:#eaae6d;
+  font-size: 0.26rem;
 }
 .userouter{
   display: block

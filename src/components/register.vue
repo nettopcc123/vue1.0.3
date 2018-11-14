@@ -17,6 +17,7 @@
     </div>
     </div>
   <button class="fbut" @click='fetchDatas(msr1,msr2)'>提交</button>
+  <button class="fbutreg" @click='golog()'>已有帐号，去登入</button>
  </div>
  </template>
 <script>
@@ -61,7 +62,10 @@ export default {
           this.$toast.center(response.data.d.ErrorMessage);
         }
       };
-      await this.http.post(url,params,callback);
+      await this.http.post(url,callback,params);
+    },
+    golog(){
+      this.$router.push({path:'/login'});
     },
     isloadhid() {
       this.$store.commit('isloadhid');
@@ -174,5 +178,12 @@ export default {
   clear:both;
   overflow:hidden;
   margin-top:0.1rem;
+}
+.fbutreg{
+    width: 94%;
+    margin-top:0.15rem;
+    color: #fff;
+    background-color: #a5818b;
+    border-color: #96726b;
 }
 </style>

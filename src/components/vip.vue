@@ -93,7 +93,7 @@ export default {
     qdfun(){
         this.qiandao = ' 已签到';
         localStorage.setItem('qd',true);
-        this.$toast.center('恭喜您成功签到，获得 10积分 奖励');
+        this.$toast.center('恭喜您成功签到，获得 10 积分奖励');
     }
   }
 }

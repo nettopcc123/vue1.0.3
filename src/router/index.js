@@ -45,10 +45,7 @@ const coupon1 = r => require.ensure([],() => r(require('@/components/coupon1')),
 const coupon2 = r => require.ensure([],() => r(require('@/components/coupon2')), 'coupon2');
 const coupon3 = r => require.ensure([],() => r(require('@/components/coupon3')), 'coupon3');
 const exch = r => require.ensure([],() => r(require('@/components/exch')), 'exch');
-
-
-
-
+const shoper = r => require.ensure([],() => r(require('@/components/shoper')), 'shoper');
 
 
 Vue.use(Router)
@@ -82,7 +79,18 @@ export default new Router({
     {
       path: '/member',
       name: 'member',
-      component: member
+      component: member,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      }
+    },
+    {
+      path: '/shoper',
+      name: 'shoper',
+      component: shoper,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      }
     },
     {
       path: '/liberty',

@@ -11,7 +11,7 @@
          <input type="checkbox" id="awesome"   />
         <label for="awesome">电信积分</label>
      </p>
-     <p class="ftclic" v-for="v,index in flis" v-bind:class="{ fact: isshow }">
+     <p class="ftclic fact" v-for="v,index in flis">
        {{ v }}
      </p>
 

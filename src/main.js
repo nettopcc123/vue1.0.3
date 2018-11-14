@@ -56,7 +56,13 @@ new Vue({
   components: { 
     App 
   },
-  template: '<App/>'
+  
+  template: '<App/>',
+  created() {
+     this.$nextTick(()=>{
+        this.bdTokenUrl = this.$route.params.url;
+    });
+},
 })
 
 //获取当前时间
@@ -112,15 +118,23 @@ Vue.use(Toast, {
 
 //判断用户是否登入
 router.beforeEach((to, from, next) => {
-    // 这里会持续性的输出 null
-    console.log(JSON.stringify(store.state.user));
-    if(store.state.user !== null){
-        next()
-    }else {
-      console.log('用户尚未登录');
-        next({
-            path: '/login',
-            query: {redirect: to.fullPath}
-        })
+    if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+        console.log('a0' + store.state.isuser + store.state.isload )
+        if (store.state.isuser) {  // 通过vuex state获取当前的token是否存在   if (store.state.token) {
+            console.log('a1')
+            next();
+        }
+        else {
+            console.log('a2')
+            next({
+                path: '/login',
+                query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+            })
+        }
+    }
+    else {
+        console.log('a3')
+        console.log('bbb')
+        next();
     }
 })
