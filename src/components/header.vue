@@ -1,6 +1,6 @@
 <template>
 <div class="header">
-    <div class="fl"><span class="menufont">比分宝典</span></div>
+    <div class="fl"><span class="menufont">11选5彩票</span></div>
     <span class="menur" @click="ismenushow"><i class="iconfont icon-menu zsm mlin"></i></span>
     <div class="menuleft" style="position:restive" v-if="ismenu">
         <div class="uid">

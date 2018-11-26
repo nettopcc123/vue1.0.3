@@ -1,6 +1,6 @@
 <template>
 <div id="favorites">
-    <h2 class="uitit">商城</h2>
+    <h2 class="uitit_a">商城</h2>
     <ul class="inter">
         <li>
             <router-link :to="{ name: 'exch', params:{ name:'全场通用2元优惠券', con:'2元优惠券'} }">
@@ -88,5 +88,16 @@ export default {
 }
 .more{
     color:#969696;
+}
+.uitit_a{
+    display: block;
+    line-height: 0.36rem!important;
+    padding-left:0.15rem;
+    font-size: 0.18rem;
+    text-align: center;
+    background:#f1efef !important;
+    border-bottom: 1px solid #fff;
+    color:#404040;
+    font-weight: normal;
 }
 </style>

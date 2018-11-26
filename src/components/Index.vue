@@ -7,12 +7,6 @@
     <h2 class="uitit02">要闻 </h2>
     <vue-newlists></vue-newlists>
     <h2 class="uitit01">体育赛事 <span></span></h2>
-    <div class="iftop01">
-       <iframe ref="iframe" id="bdIframe01" :src="bdTokenUrl01" frameborder="0" scrolling="no" width="100%" height="500px" ></iframe>
-    </div>
-    <!-- <div class="gamhb">
-      <iframe ref="iframe" id="bdIframe" :src="bdTokenUrl" frameborder="0" scrolling="no" width="100%" height="200px" ></iframe>
-    </div> -->
     <vue-newlists01></vue-newlists01>
   </div>
 </template>

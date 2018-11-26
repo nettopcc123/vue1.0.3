@@ -1,6 +1,6 @@
 <template>
 <div id="favorites">
-    <h2 class="uitit">我的收藏</h2>
+    <h2 class="uitit_a">我的收藏</h2>
     <div class="favors">
      你还没有收藏任何数据呢，去看看吧
     </div>
@@ -41,5 +41,16 @@ export default {
     font-size: 0.18rem;
     text-align: left;
     background:#fff!important;
+}
+.uitit_a{
+    display: block;
+    line-height: 0.36rem!important;
+    padding-left:0.15rem;
+    font-size: 0.18rem;
+    text-align: center;
+    background:#f1efef !important;
+    border-bottom: 1px solid #fff;
+    color:#404040;
+    font-weight: normal;
 }
 </style>

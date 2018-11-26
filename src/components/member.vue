@@ -1,16 +1,6 @@
 
 <template>
   <div class="user">
-      <div class="uwb">
-          <img :src="require('./../components/img/user.png?1111')" alt="" class="userimg">
-          <p class="usename">{{ username }}</p>
-          <p class="uvip">{{ uvip }}</p>
-          <ul class="uslis">
-              <li><router-link :to="{name:'favorites'}" class="userouter"><i class="iconfont icon-favorite"></i><span>收藏</span></router-link></li>
-              <li><router-link :to="{name:'follow'}" class="userouter"><i class="iconfont icon-follow"></i><span>关注</span></router-link></li>
-              <li><router-link :to="{name:'fans'}" class="userouter"><i class="iconfont icon-fans"></i><span>粉丝</span></router-link></li>
-          </ul>
-      </div>
       <ul class="uselis">
          <li><router-link :to="{name:'feedback'}" class="userouter"><i class="iconfont icon-feedback01 meicl"></i>意见反馈<i class="iconfont icon-next01 usenext"></i></router-link></li>
          <li><router-link :to="{name:'vip'}" class="userouter"><i class="iconfont icon-member meicl"></i>会员俱乐部<i class="iconfont icon-next01 usenext"></i></router-link></li>
@@ -20,6 +10,15 @@
          <li><router-link :to="{name:'favorites'}" class="userouter"><i class="iconfont icon-collection meicl"></i>我的收藏<i class="iconfont icon-next01 usenext"></i></router-link></li>
          <li @click="isloadshow" class="userouter"><i class="iconfont icon-clean meicl"></i>清除缓存<i class="iconfont icon-next01 usenext"></i></li>
      </ul>
+           <div class="uwb">
+          <!-- <p class="usename">{{ username }}</p>
+          <p class="uvip">{{ uvip }}</p> -->
+          <ul class="uslis">
+              <li><router-link :to="{name:'favorites'}" class="userouter"><i class="iconfont icon-favorite"></i><span>收藏</span></router-link></li>
+              <li><router-link :to="{name:'follow'}" class="userouter"><i class="iconfont icon-follow"></i><span>关注</span></router-link></li>
+              <li><router-link :to="{name:'fans'}" class="userouter"><i class="iconfont icon-fans"></i><span>粉丝</span></router-link></li>
+          </ul>
+      </div>
   </div>
 </template>
 <script>
@@ -108,7 +107,7 @@ export default {
 .uselis{
   display:block;
   text-align: center;
-  margin: 0.1rem auto;
+  margin: 0.2rem auto 0rem;
   text-align: center;
   width: 90%;
 }
@@ -121,6 +120,8 @@ export default {
   border-bottom: 0.01rem double #fff;
   font-size: 0.16rem;
   color:#5b5b5b;
+  background: #fff;
+  border-radius: 0.1rem;
 }
 .uselis li a{
   font-size: 0.16rem;
@@ -132,7 +133,7 @@ export default {
 .meicl{
   float:left;
   margin-right:0.12rem;
-  color:#eaae6d;
+  color:#ea6d6d;
   font-size: 0.26rem;
 }
 .userouter{

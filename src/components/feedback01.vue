@@ -6,7 +6,7 @@
         		<strong>请您留言</strong>
         		</div>
         <p>
-            感谢您对手机大乐透走势规则助手的支持！<br>
+            感谢您对11选5彩票的支持！<br>
             您反馈的问题有结果后我们会第一时间给您回复。
         </p>
           <input type="hidden" name="boardid" value="109">

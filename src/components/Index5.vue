@@ -7,15 +7,8 @@
     <div class="z1">
         <vue-banner></vue-banner>
     </div>
-    <h2 class="uitit02">足球比分<span></span></h2>
-    <div class="gamhb">
-      <iframe ref="iframe" id="bdIframe" :src="bdTokenUrl" frameborder="0" scrolling="no" width="100%" height="1040px" ></iframe>
-    </div>
-   
     <h2 class="uitit02">娱乐新闻<span></span></h2>
-    <div class="iftop06">
-       <iframe ref="iframe" id="bdIframe01" :src="bdTokenUrl01" frameborder="0" scrolling="no" width="100%" height="2200px" ></iframe>
-    </div>
+    <vue-newlists2></vue-newlists2>
   </div>
 </template>
 <script>
@@ -24,6 +17,7 @@ import banner from './../components/banner';
 import newlists from './../components/new_h03';
 import newlists01 from './../components/new_h04';
 import marquee from './../components/marquee';
+import newlists2 from './../components/newlists2';
 //import score from './../components/score';
 
 
@@ -46,7 +40,8 @@ export default {
     'vue-banner':banner,
     'vue-newlists':newlists,
     'vue-newlists01':newlists01,
-    'vue-marquee':marquee
+    'vue-marquee':marquee,
+    'vue-newlists2':newlists2
   },
   mounted: function () {
     this.$nextTick(function () {
