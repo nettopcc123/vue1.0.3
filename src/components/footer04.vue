@@ -14,7 +14,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'framekj'}" v-bind:class="{ active: isNews }">
+                <router-link :to="{ name: 'newlists1'}" v-bind:class="{ active: isNews }">
                     <i class="iconfont icon-news01"></i>
                    <p>新闻</p>
                 </router-link>
@@ -100,7 +100,7 @@ export default {
 // }
 .footer ul li a{
     text-align: center;
-    background: url('img/footbg01_1.png') left top repeat-x #f03b6a;
+    background: url('img/footbg01_1.png') left top repeat-x #c25e69;
     color:#fff;
     height: 0.4rem;
     display: inherit;
@@ -123,15 +123,15 @@ export default {
     text-align: left;
 }
 .footer ul li .router-link-exact-active{
-    border-bottom:1px solid #363057;
-    color:#363057;
+    border-bottom:1px solid #197d2a;
+    color:#197d2a;
     background: url('img/footbg02_1_h.png') left top repeat-x #fff;
 }
 
 .footer .active{
-    border-bottom:1px solid #363057;
-    color:#363057;
-    background: url('img/footbg02_1_h.png') left top repeat-x #fff;  
+    border-bottom:1px solid #197d2a;
+    color:#197d2a;
+    background: url('img/footbg02_1_h.png') left top repeat-x #fff;
 }
 
 </style>

@@ -133,7 +133,7 @@ export default {
 .meicl{
   float:left;
   margin-right:0.12rem;
-  color:#ea6d6d;
+  color:#5d7d62;
   font-size: 0.26rem;
 }
 .userouter{

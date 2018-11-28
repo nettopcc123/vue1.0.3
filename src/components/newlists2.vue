@@ -4,7 +4,7 @@
         <ul class="nlist">
             <li v-for="(value, key) in newList">
                 <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
-                <span class="nimg"><img :src="require('./../components/img/ban/f/' + value.Image +'.jpg')"></span>
+                <span class="nimg"><img :src="require('./../components/img/ban/d/' + value.Image +'.jpg')"></span>
                 <span class="newsCtn">
                     <h2 class="ntit">{{ value.Title | filter | restr }}</h2>
                     <p class="ntb"><span class="nname">消息来源：{{ value.Source }} </span></p>
@@ -122,7 +122,7 @@ export default {
             // 对响应错误做点什么
             return Promise.reject(error);
           });
-            axios.get('http://154.48.238.35:8085/UserService.svc/NewsList?newstype=娱乐&pageindex=' + num + '&pagesize=10')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
+            axios.get('http://154.48.238.35:8085/UserService.svc/NewsList?newstype=体育&pageindex=' + num + '&pagesize=60')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
             .then(res => {
               console.log(res)
               res.data.d.Data.forEach(v => {
@@ -159,7 +159,7 @@ export default {
 <style lang="scss">
 @import "scss/base.scss";
 .vrw{
-    height: 85%;
+    height: 100%;
 }
 .nimg{
   width: 35%;

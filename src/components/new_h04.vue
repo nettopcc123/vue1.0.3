@@ -1,24 +1,12 @@
-
 <template>
   <div class="newlists" id="newlists">
         <ul class="nlist">
-            <li>
-                <router-link :to="{ name: 'newsMore1', params: { articid: newList.news_id , url: newList1.news_url}}">
+            <li v-for="(value, key) in newList">
+                <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
                 <span class="newsCtnbig">
-                    <h2 class="ntitbig">{{ newList1.content | filter }}</h2>
+                    <h2 class="ntitbig">{{ value.Title | filter | restr }}</h2>
                 </span>
                 <span class="nimgbig"><img :src="require('./../components/img/b_3.jpg?1111')" alt=""></span>
-                </router-link>
-            </li>
-        </ul>
-        <ul class="nlist">
-            <li>
-                <router-link :to="{ name: 'newsMore1', params: { articid: newList.news_id , url: newList2.news_url}}">
-                <span class="nimg"><img :src="require('./../components/img/b_2.jpg?1111')" alt=""></span>
-                <span class="newsCtn">
-                    <h2 class="ntit">{{ newList2.content | filter }}</h2>
-                    <i class="mark2"><i class="iconfont icon-message msg"></i>{{newList2.time}} {{ newList2.event_name }}</i>
-                </span>
                 </router-link>
             </li>
         </ul>
@@ -31,31 +19,27 @@ import banner from './../components/banner';
 import newlists from './../components/newlists';
 import { setTimeout } from 'timers';
 import $ from 'jquery';
+
 export default {
   name: 'user',
   data () {
     return {
       newList:[],
-      newList1:[],
-      newList2:[],
-      newList3:[],
-      newList4:[],
-      newList5:[],
       REQUIRE: true,
       loading: false,
-      num:103,
+      num:0,
       tips:'努力加载中...',
       url1: '',
+      noimg: require('../assets/noimg.jpg'),
     }
   },
   created: function(){
-    this.newVue(this.num);
+    if(this.num == 0){
+      this.newVue(this.num);
+    }
   },
   mounted: function () {
-    this.$nextTick(() => {//在下次 DOM 更新循环结束之后执行延迟回调
-          document.getElementById('vrw').addEventListener('scroll',this.scrollBottom);
-          this.url1 = 'https://m.sporttery.cn/app/zf/fb/livelist.html';
-    })
+
   },
   filters:{
     filter:function(value){
@@ -64,6 +48,20 @@ export default {
           return value.slice(0,40) + '...';
         }
         return value;
+    },
+    restr:function(value){
+      if (!value) return '';
+      if (value.length > 2) {
+          return value.replace(/天天彩/, "双色球走势图预判专家");
+      }
+      return value;
+    },
+    redata:function(str){
+       var date =  new Date(str * 1000 );
+       var y = 1900+date.getYear();
+       var m = "0"+(date.getMonth()+1);
+       var d = "0"+date.getDate();
+       return y+"年"+m.substring(m.length-2,m.length)+"月"+d.substring(d.length-2,d.length) + '日';
     }
   },
   computed:{
@@ -95,105 +93,39 @@ export default {
       newVue:function(num){
         axios.interceptors.request.use(config => {  
           this.isloadshow();      
-             console.log('1');
+             console.log('1')
             return config;
           }, function (error) {
             // 对请求错误做些什么
             console.log('2');
+
+            
             return Promise.reject(error);
           });
 
         // 添加响应拦截器
         axios.interceptors.response.use(response => {
             // 对响应数据做点什么
-            console.log('a3');
+            console.log('a3')
             this.isloadhid();  
-            this.isloadhid;
            // this.$store.commit('isloadhid');
             return response;
           }, function (error) {
-            console.log('4');
+            console.log('4')
             // 对响应错误做点什么
             return Promise.reject(error);
           });
-          
-           var a=(new Date()).toLocaleDateString()//获取当前日期
-           a =a.replace(/\//g,'-');//替换2017/05/03 为    2017-05-03
-           var nowdate= (new Date(a))/1000;//把当前日期变成时间戳
-
-            axios.get('static/new.json')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
+            axios.get('http://154.48.238.35:8085/UserService.svc/NewsList?newstype=体育&pageindex=' + 5 + '&pagesize=1')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
             .then(res => {
-              console.log(typeof(res));
-              
-              if(localStorage.getItem('newlist')){
-                  this.newList = JSON.parse(localStorage.getItem('newlist'));
-              }else{
-                this.newList = res.data.showapi_res_body.contentlist[0];
-                localStorage.setItem('newlist',JSON.stringify(this.newList));
-              }
-
-              if(localStorage.getItem('newlist1')){
-                  this.newList1 = JSON.parse(localStorage.getItem('newlist1'));
-              }else{
-                this.newList1 = res.data.showapi_res_body.contentlist[1];
-                localStorage.setItem('newlist1',JSON.stringify(this.newList1));
-              }
-                          
-              if(localStorage.getItem('newlist2')){
-                  this.newList2 = JSON.parse(localStorage.getItem('newlist2'));
-              }else{
-                  this.newList2 = res.data.showapi_res_body.contentlist[2];
-                  localStorage.setItem('newlist2',JSON.stringify(this.newList2));
-              }
-              
-              if(localStorage.getItem('newlist3')){
-                  this.newList3 = JSON.parse(localStorage.getItem('newlist3'));
-              }else{
-                this.newList3 = res.data.showapi_res_body.contentlist[6];
-                localStorage.setItem('newlist3',JSON.stringify(this.newList3));
-              }
-              
-              if(localStorage.getItem('newlist4')){
-                  this.newList4 = JSON.parse(localStorage.getItem('newlist4'));
-              }else{
-                this.newList4 = res.data.showapi_res_body.contentlist[4];
-                localStorage.setItem('newlist4',JSON.stringify(this.newList4));
-              }
-              
-              if(localStorage.getItem('newlist5')){
-                  this.newList5 = JSON.parse(localStorage.getItem('newlist5'));
-              }else{
-                this.newList5 = res.data.showapi_res_body.contentlist[5];
-                localStorage.setItem('newlist5',JSON.stringify(this.newList5));
-              }
-
-          
-              console.log(this.newList);
-              if( num >= 3){
-                this.tips = '加载完成';
-                return;
-              }
+              console.log(res)
+              res.data.d.Data.forEach((v,k) => {
+                this.newList.push(v);
+              });
             })
             .catch(error => {
                 console.log(error);
                 this.REQUIRE = false;
             });
-        },
-        scrollBottom:function(){
-
-          if( (($('#vrw').scrollTop() + (window.screen.height)) >  $('#newlists').height()) && this.REQUIRE == true && this.num <= 4 ){
-              this.REQUIRE = false;
-              this.loading = true;
-              this.tips = '正在加载中';
-              this.newVue(this.num);
-              this.$nextTick(() => {
-                this.REQUIRE = true;
-                this.loading = false;
-                this.num ++;
-              })
-          }else{
-            this.loading = true;
-          }
         }
   }
 }
@@ -201,26 +133,30 @@ export default {
 
 <style lang="scss" scoped>
 @import "scss/base.scss";
-.nimg{
-    float: left;
-    width:1.4rem;
+.vrw{
+    height:100%;
 }
-.nimgbig{
-    width:100%;
+.nimg{
+  width: 35%;
+  float:left;
+}
+.newsCtn{
+  width:62%;
+  float:right;
 }
 .nlist{
   display:block;
   text-align: center;
-  text-align: center;
-  background:#fff;
-  margin-top: 8px;
+  text-align: center
 }
 .nlist li{
   display:block;
   margin-bottom:0.05rem;
   text-align: left;
   font-size: 0.16rem;
-  color:#5b5b5b
+  color:#5b5b5b;
+  border-bottom:1px dotted #ccc;
+  padding:0.05rem 0.1rem;
 }
 .nlist li a{
   font-size: 0.16rem;
@@ -228,16 +164,11 @@ export default {
 }
 .ntit{
   font-size: 0.18rem;
-  color:#303030;
+  color:#2a2a2a;
   font-weight: normal;
-  height: 1rem;
+  height: 0.64rem;
   overflow: hidden;
-}
-.ntitbig{
-  font-size: 0.18rem;
-  color:#303030;
-  font-weight: normal;
-  margin-bottom:0.08rem;
+  line-height: 0.28rem;
 }
 .infinite-scroll{
   width: 0.5rem;
@@ -245,43 +176,34 @@ export default {
   margin:0 auto;
 }
 .nimg img{
-  width: 1.4rem;
-  height:1.2rem;
+  width: 113rem;
+  height:0.75rem;
+}
+.ntime{
+    color: #b5b5b5;
+    text-align: left;
+}
+.nname{
+    color: #b5b5b5;
+}
+.ntb{
+    display: block;
+    clear:both;
+    overflow: hidden;
+    margin-top:0.08rem;
 }
 .nimgbig img{
   width: 100%;
   height:1.9rem;
 }
-.newsCtn{
-    float: right;
-    width:2.1rem;
+.ntitbig{
+  font-size: 0.18rem;
+  color:#303030;
+  font-weight: normal;
+  margin-bottom:0.08rem;
 }
 .newsCtnbig{
     width:100%;
 }
-.mark2{
-    text-align: left;
-    display: block;
-    font-style: normal;
-    color:#9f9f9f
-}
-.msg{
-    padding-right: 0.01rem;
-    font-size: 0.18rem;
-}
-.uitit01{
-    display: block;
-    line-height: 0.36rem!important;
-    padding-left:0.15rem;
-    font-size: 0.14rem;
-    text-align: left;
-    background:#65acda!important;
-    color: #fff;
-    z-index:11;
-   position: relative;
-}
-.uitit01 span{
-    float:right;
-}
-</style>
 
+</style>

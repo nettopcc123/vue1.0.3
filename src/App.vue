@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:class="{ houv:ishouv }">
     <!-- <div class="header" v-if="isBanner">大乐透走势规则助手</div> -->
-    <vue-header v-if="isHeard"></vue-header>
+    <vue-header></vue-header>
     <div style="position:restive" v-if="isload">
         <loading class="showload"></loading>
         <div class="bg" @click="isloadhid"></div>
@@ -10,7 +10,7 @@
         <alert class="showalert"></alert>
         <div class="bg" @click="isalerthid"></div>
     </div>
-    <div class="vrw" id="vrw">
+    <div class="vrw" id="vrw" v-bind:class="{ houv:ishouv }">
         <transition :name="transitionName">
             <router-view class="child-view"></router-view>
         </transition>
@@ -63,7 +63,8 @@ export default {
             isNews: false,
             isBanner: false,
             isHeard: true,
-            isMore01: true
+            isMore01: true,
+            ishouv: false
         }  
     },
 　　watch: {
@@ -77,12 +78,17 @@ export default {
 　　    this.$router.isBack = false;
 　　},
     $route(to,from){
+        if(to.path == '/htmlViewSample'){
+            this.ishouv = true;
+        }else{
+            this.ishouv = false;
+        }
         if(to.path == '/newsMore1'){ //用户中心
             this.isMore01 = true;
         }else{
             this.isMore01 = false;
         }
-        if(to.path == '/vip' || to.path == '/liberty' || to.path == '/coupon'){ //用户中心
+        if(to.path == '/vip' || to.path == '/liberty' || to.path == '/coupon' || '/newsMore1'){ //用户中心
             this.isHeard = false;
         }else{
             this.isHeard = true;
@@ -190,7 +196,7 @@ html {
 }
 body{
     height:100%;
-    background:#eaeaea;
+    background:#ffffff;
     overflow-x: hidden;
 }
 
@@ -308,16 +314,16 @@ button{
     background-color: #fff;
     border-color: #dcdee2; */
     color: #fff;
-    background-color: #8781a5;
-    border-color: #736b96
+    background-color: #338682;
+    border-color: #1f5d5a;
 }
 @font-face {
   font-family: 'iconfont';  /* project id 880675 */
-  src: url('//at.alicdn.com/t/font_880675_40d6e69mymj.eot');
-  src: url('//at.alicdn.com/t/font_880675_40d6e69mymj.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_880675_40d6e69mymj.woff') format('woff'),
-  url('//at.alicdn.com/t/font_880675_40d6e69mymj.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_880675_40d6e69mymj.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_880675_mn098a1cgqk.eot');
+  src: url('//at.alicdn.com/t/font_880675_mn098a1cgqk.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_880675_mn098a1cgqk.woff') format('woff'),
+  url('//at.alicdn.com/t/font_880675_mn098a1cgqk.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_880675_mn098a1cgqk.svg#iconfont') format('svg');
 }
 .iconfont {
     font-family: "iconfont" !important;
@@ -422,6 +428,9 @@ button{
 .icon-clean:before {
     content: "\e609";
 }
+.icon-back:before{
+    content: "\e8f4";
+}
 .fico{
     display: block;
     font-size:0.2rem;
@@ -442,9 +451,14 @@ button{
     font-size: 0.2rem;
     font-weight: bold;
     height: 8%;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
 }
-
-
+.houv{
+    overflow: hidden;
+}
 .itit{
     display: block;
     line-height: 0.36rem;

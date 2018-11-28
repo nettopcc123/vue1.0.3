@@ -1,6 +1,6 @@
 <template>
 <div class="header">
-    <div class="fl"><span class="menufont">11选5彩票</span></div>
+    <div class="fl"><span class="menufont">连中足球</span></div>
     <span class="menur" @click="ismenushow"><i class="iconfont icon-menu zsm mlin"></i></span>
     <div class="menuleft" style="position:restive" v-if="ismenu">
         <div class="uid">
@@ -75,7 +75,7 @@ export default {
     float:left;
     margin-right:0.08rem;
     width:0.5rem;
-    border-left:1px solid #2b2643;
+    border-left:1px solid #24652e;
     text-align: center;
 }
 .menur{

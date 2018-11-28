@@ -2,17 +2,17 @@
 <div id="container">
  <swiper :options="swiperOption" ref="mySwiper">
   <swiper-slide class="swiper-slide games">
-    <router-link :to="{ name: 'newsMore1', params: { url: url.new01}}">
+    <router-link :to="{ name: 'newsMore1', params: { articid: 455}}">
    <img :src="require('./../components/img/004.jpg?1111')" alt="">
    </router-link>
   </swiper-slide>
   <swiper-slide class="swiper-slide games">
-   <router-link :to="{ name: 'newsMore1', params: { url: url.new02}}">
+    <router-link :to="{ name: 'newsMore1', params: { articid: 459}}">
      <img :src="require('./../components/img/005.jpg?1111')" alt="">
    </router-link>
   </swiper-slide>
     <swiper-slide class="swiper-slide games">
-    <router-link :to="{ name: 'newsMore1', params: { url: url.new03}}">
+     <router-link :to="{ name: 'newsMore1', params: { articid: 460}}">
      <img :src="require('./../components/img/006.jpg?1111')" alt="">
     </router-link>
   </swiper-slide>

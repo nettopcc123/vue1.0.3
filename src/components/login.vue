@@ -178,7 +178,7 @@ export default {
     width: 94%;
     margin-top:0.15rem;
     color: #fff;
-    background-color: #a5818b;
-    border-color: #96726b;
+    background-color: #81a59b;
+    border-color: #6b968e;
 }
 </style>

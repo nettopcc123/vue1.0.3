@@ -1,64 +1,101 @@
 <template>
-    <div>
-        <div class="iftop">
-        <iframe ref="iframe" id="bdIframe" :src="bdTokenUrl" frameborder="0" scrolling="no" width="100%" height="1050px" ></iframe>
-        </div>
-    </div>
-</template>
-
+<div id="newsMore">
+       <h2 class="uitit"><i class="iconfont icon-back uic" @click="routerback"></i>新闻</h2>
+       <div class="ccon">
+           <h6 v-html="content.Title" class="title"></h6>
+           <p class="corem">消息来源：{{ content.Source }}</p>
+           <hr>
+           <div class="con">
+             <div v-html="content.Content"></div>
+           </div>
+       </div>
+ </div> 
+ </template>
 <script>
-import banner from './../components/banner';
-    export default {
-        data() {
-            return {
-                bdTokenUrl: this.$route.params.url  //https://m.sporttery.cn/app/zf/fb/livelist.html  https://m.sporttery.cn/app/zf/fb/livelist.html
-            }
-        },
-        created() {
-           // this.getUrl();
-            this.$nextTick(()=>{
-                this.bdTokenUrl = this.$route.params.url;
+import axios from 'axios';
+export default {
+  name: 'newsMore',
+  data () {
+    return {
+      newList:[],
+      articid : this.$route.params.articid,
+      content : []
+    }
+  },
+  mounted: function () {
+    this.$nextTick(function(){
+        this.articid = this.$route.params.articid,
+        console.log(this.$route.params.articid);
+        this.newVue();
+        console.log('bbb');
+    })
+  },
+  methods: {
+        newVue:function(){
+            axios.get('http://154.48.238.35:8085/UserService.svc/NewsDetail?id=' + this.articid)
+           .then(res => {
+                console.log(res.data.d)
+                this.content = res.data.d;
+            })
+            .catch(error => {
+                console.log(error);
             });
         },
-        mounted(){
-            /**
-             * iframe-宽高自适应显示   
-             */
-            const oIframe = document.getElementById('bdIframe');
-            const deviceWidth = document.documentElement.clientWidth;
-            const deviceHeight = document.documentElement.clientHeight;
-            oIframe.style.width =  '100%'; //数字是页面布局宽度差值
-            oIframe.style.height = '1050px'; //数字是页面布局高度差
-        },
-  components: {
-    'vue-banner':banner
-  },
-    //     methods: {
-    //         /**
-    //          * 获取-外部接口信息
-    //          */
-    //         getUrl() {
-    //             let that = this
-    //             let bdUrl = {queryurl: this.$paths.bdpath+'/locate'};
-    //             this.$api.getBdToken(bdUrl,function(res) {
-    //                 that.bdTokenUrl = res.data.data;
-    //             })
-    //         },
-    //    }
-    }
+        routerback: function () {
+            this.$router.back(-1)
+        }
+  }
+}
 </script>
 
-<style lang="scss" scoped>
-@import "scss/base.scss";
-.child-view{
-    height:90%;
-}
+<style scoped>
 .vrw{
-  width: 100%;
+    height: 90%!important;
 }
-.iftop{
-    height: 100%;
-    margin-bottom:80px;
-    margin-top:-40px;
+.ccon{
+  width: 3.4rem;
+  margin: 0.5rem auto 0;
+}
+.uitit{
+    display: block;
+    line-height: 0.36rem!important;
+    padding-left:0.15rem;
+    font-size: 0.18rem;
+    text-align: left;
+    background:#f2f2f2!important;
+    text-align: center;
+    position: fixed;
+    left:0;
+    top:0rem;
+    width: 100%;
+}
+.uitit i{
+    float:left;
+    position: absolute;
+    left:0.1rem;
+    bottom:0px;
+}
+.title{
+    font-size: .14rem;
+    line-height: .2rem;
+    vertical-align: baseline;
+    color: #5f5f5f;
+    letter-spacing: -0.5px;
+    margin:10px 0 0rem;
+    font-weight: normal
+}
+.corem{
+    margin:5px 0px;
+    color:#bdbdbd;
+    text-align:center;
+}
+.con p, .con div, .con h1, .con h2, .con h3, .con h4 {
+    font-size: .17rem;
+    line-height: .3rem;
+    font-weight: normal;
+    vertical-align: baseline;
+    color: #222;
+    letter-spacing: -0.5px;
+    margin: 0 0 .13rem;
 }
 </style>

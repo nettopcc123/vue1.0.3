@@ -160,7 +160,7 @@ export default {
 <style lang="scss">
 @import "scss/base.scss";
 .vrw{
-    height: 85%;
+    height: 100%;
 }
 .nimg{
   width: 35%;

@@ -123,7 +123,7 @@ export default {
             // 对响应错误做点什么
             return Promise.reject(error);
           });
-            axios.get('http://154.48.238.35:8085/UserService.svc/NewsList?newstype=科技&pageindex=' + num + '&pagesize=10')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
+            axios.get('http://154.48.238.35:8085/UserService.svc/NewsList?newstype=科技&pageindex=' + num + '&pagesize=64')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
             .then(res => {
               console.log(res)
               res.data.d.Data.forEach(v => {
@@ -160,7 +160,7 @@ export default {
 <style lang="scss">
 @import "scss/base.scss";
 .vrw{
-    height: 85%;
+    height: 100%;
 }
 .nimg{
   width: 35%;
